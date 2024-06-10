@@ -1,0 +1,103 @@
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f2f2f2;
+  font-family: Arial, sans-serif;
+}
+
+.right {
+  background-color: #fff;
+  border: 2px solid #ffa500; /* Orange border */
+  border-radius: 10px;
+  padding: 40px;
+  width: 450px; /* Increased width */
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 1.8em; /* Larger font size */
+  color: #008000; /* Green text for heading */
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.inputbox {
+  position: relative;
+  margin-bottom: 30px; /* Increased margin for larger gap */
+}
+
+.inputbox input {
+  width: 100%;
+  padding: 15px; /* Increased padding */
+  padding-right: 50px; /* Increased padding-right for icon */
+  font-size: 1.2em; /* Larger font size */
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.inputbox input:focus {
+  border-color: #ffa500; /* Orange border on focus */
+  outline: none; /* Remove default outline */
+}
+
+.inputbox button {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.inputbox .eye {
+  color: #ffa500; /* Orange color for eye icon */
+  font-size: 1.5em; /* Larger icon */
+}
+
+.inputbox .icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #ffa500; /* Orange color for lock icon */
+  font-size: 1.5em; /* Larger icon */
+}
+
+#login {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  margin-top: 50px; /* Margin to create gap between password box and button */
+  margin-bottom: 40px;
+}
+
+#login button {
+  background-color: #008000; /* Green button */
+  color: #fff;
+  padding: 15px 30px; /* Increased padding */
+  font-size: 1.2em; /* Larger font size */
+  border: none;
+  border-radius: 70px;
+  cursor: pointer;
+}
+
+#login button:hover {
+  background-color: #006400; /* Darker green on hover */
+}
