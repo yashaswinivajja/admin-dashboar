@@ -7,82 +7,66 @@ import "./Login.css";
 
 export const Login = () => {
   const apiUrl = process.env.REACT_APP_API_URL;
-  const [PhoneNumber, setPhoneNumber] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
-  const handlePhoneNumber = (e) => {
-    const inputvalue = e.target.value;
-    setPhoneNumber(inputvalue);
+  const handlePhoneNumberChange = (e) => {
+    setPhoneNumber(e.target.value);
   };
 
-  const handlePassword = (e) => {
-    const inputvalue = e.target.value;
-    setPassword(inputvalue);
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
+      const params = new URLSearchParams();
+      params.append("phoneNumber", phoneNumber);
+      params.append("password", password);
+
       const response = await axios.post(
-        `${apiUrl}/api/v1/login`,
-        { PhoneNumber, password },
+        `${apiUrl}/api/v1/login?${params.toString()}`,
+        null,
         { withCredentials: true }
       );
-      console.log(response);
+
+      console.log("Response received:", response);
 
       if (
         response.status === 200 &&
-        response.data.message === "User login successful"
+        response.data.message === "User logged in successfully."
       ) {
-        console.log("login successful", response.data);
+        console.log("Login successful", response.data);
         localStorage.setItem("token", response.data.token);
         setAuthHeaders(response.data.token);
         navigate("/home");
+      } else {
+        alert("Login failed: Incorrect credentials");
       }
     } catch (error) {
-      if (
-        error.response.status === 400 &&
-        error.response.data.message === "User not found"
-      ) {
-        alert("consider signing up first");
-      }
-      if (
-        error.response.status === 401 &&
-        error.response.data.message === "Incorrect password"
-      ) {
-        alert("Invalid password");
-      }
-      if (
-        error.response.status === 500 &&
-        error.response.data.message === "Internal server error"
-      ) {
-        alert("server Error Try again");
-      }
-      console.error("login failed", error);
+      console.error("Login error:", error);
+      alert("Login failed: Please recheck your credentials.");
     }
   };
 
-  const togglePasswordVisibility = (event) => {
-    event.preventDefault();
+  const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
 
   return (
     <div className="right">
       <form onSubmit={handleSubmit}>
-        {" "}
-        {/* Use onSubmit event handler */}
         <h2>Login</h2>
         <div className="inputbox">
           <input
-            type="PhoneNumber"
-            placeholder="PhoneNumber"
-            name="PhoneNumber"
-            value={PhoneNumber}
-            onChange={handlePhoneNumber}
+            type="text"
+            placeholder="Phone Number"
+            value={phoneNumber}
+            onChange={handlePhoneNumberChange}
             required
           />
         </div>
@@ -90,24 +74,24 @@ export const Login = () => {
           <input
             type={showPassword ? "text" : "password"}
             placeholder="Password"
-            name="password"
             value={password}
-            onChange={handlePassword}
+            onChange={handlePasswordChange}
             required
           />
           <button type="button" onClick={togglePasswordVisibility}>
             {showPassword ? (
-              <BsEye className="eye" />
-            ) : (
               <BsEyeSlash className="eye" />
+            ) : (
+              <BsEye className="eye" />
             )}
           </button>
         </div>
-        <div className="inputbox" id="login">
+        <div className="inputbox">
           <button type="submit">Login</button>
         </div>
       </form>
     </div>
   );
 };
+
 export default Login;

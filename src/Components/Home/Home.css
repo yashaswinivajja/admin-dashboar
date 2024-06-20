@@ -5,6 +5,26 @@
 h1 {
   text-align: center;
 }
+.tab-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.tab {
+  padding: 10px 20px;
+  margin: 0 10px;
+  cursor: pointer;
+  border: none;
+  background-color: #f0f0f0;
+  border-bottom: 2px solid transparent;
+  font-size: 16px;
+}
+
+.tab.active {
+  border-bottom: 2px solid #007bff;
+  font-weight: bold;
+}
 
 .user-table {
   width: 100%;
@@ -19,11 +39,7 @@ h1 {
   text-align: left;
 }
 
-.user-table th {
-  background-color: #f2f2f2;
-}
-
-button {
+/* button {
   margin: 0 5px;
   padding: 5px 10px;
   cursor: pointer;
@@ -35,7 +51,7 @@ button {
 
 button:hover {
   background-color: #0056b3;
-}
+} */
 
 .edit-form {
   margin-top: 20px;
